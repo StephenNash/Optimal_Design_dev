@@ -1,4 +1,3 @@
-﻿
 /*
 Optimal design do file
 
@@ -48,9 +47,7 @@ Still to do:
 	Help file - Look at swpermute - Jenny's program
 	In Help file - explain "mixed" will replay model
 	Return r(table)
-	
 */
-
 cap prog drop samy76
 prog define samy76 , rclass
 	version 14 // Change this & check results are the same with final code.
