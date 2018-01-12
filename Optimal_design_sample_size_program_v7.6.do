@@ -127,11 +127,11 @@ prog define samy76 , rclass
 							if "`effectiveness'"!="" { // Effectiveness is specified
 								capture confirm number `effectiveness'
 									if _rc {
-										dis as error "Effectiveness must be a number between 0 and 100"
+										dis as error "Effectiveness must be a number between 0 and 1"
 										exit 198
 									}
 								if `effectiveness' > 1 {
-									dis as error "Effectiveness must be less than 100"
+									dis as error "Effectiveness must be less than 1"
 									exit 198
 								}
 								if `effectiveness' <=0 {
@@ -531,7 +531,7 @@ prog define samy76 , rclass
 						else { // Calc POWER
 							// Calc the power here
 							scalar `sampsize' = `given_n' // As specified by the user, just transferring to output scalar
-							scalar `z_power' = ( abs(`effsize')*`effectiveness'/sqrt(2*`given_n') ) - invnormal(1-`alpha'/2)
+							scalar `z_power' = ( abs(`effsize')*`effectiveness'*sqrt(`given_n'/2) ) - invnormal(1-`alpha'/2)
 							scalar `power' = normal(`z_power')
 							
 						}
@@ -585,7 +585,7 @@ prog define samy76 , rclass
 						display as text _n "Study parameters:" _n
 						display as text "                     alpha =  " as result %6.4f round(`alpha', 0.0001)
 						display as text "                     power =  " as result %6.4f round(`power', 0.0001)
-						display as text "             effectiveness = " as result %4.2f round(`effectiveness')
+						display as text "             effectiveness = " as result %4.2f round(`effectiveness', 0.02)
 						display as text "number of follow-up visits = " as result `vvv'
 						display as text "   schedule (and dropouts) : " as result "`sched_string'"
 						display as text "                     scale = " as result `scale'
@@ -598,8 +598,9 @@ prog define samy76 , rclass
 					if "`power_or_n'"=="n" { // N is given, so we're calculating POWER
 						display as text _n "Study parameters:" _n
 						display as text "                     alpha = " as result %6.4f round(`alpha', 0.0001)
-						display as text "                         N =   " as result " `n'
-						display as text "             effectiveness =  " as result %4.2f round(`effectiveness')
+						display as text "                         N =   " as result 2*ceil(`n'/2)
+						display as text "                 N per arm =   " as result ceil(`n'/2)
+						display as text "             effectiveness =  " as result %4.2f round(`effectiveness', 0.02)
 						display as text "number of follow-up visits = " as result `vvv'
 						display as text "   schedule (and dropouts) : " as result "`sched_string'"
 						display as text "                     scale = " as result `scale'
