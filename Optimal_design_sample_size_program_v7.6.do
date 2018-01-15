@@ -106,6 +106,7 @@ prog define samy76 , rclass
 						dis as error "N must be a numerical value"
 						exit 198
 					}
+					local n = ceil(`given_n')
 					local power_or_n n
 				}
 				* 4
@@ -585,7 +586,7 @@ prog define samy76 , rclass
 						display as text _n "Study parameters:" _n
 						display as text "                     alpha =  " as result %6.4f round(`alpha', 0.0001)
 						display as text "                     power =  " as result %6.4f round(`power', 0.0001)
-						display as text "             effectiveness = " as result %4.2f round(`effectiveness', 0.02)
+						display as text "             effectiveness = " as result %4.2f round(`effectiveness', 0.01)
 						display as text "number of follow-up visits = " as result `vvv'
 						display as text "   schedule (and dropouts) : " as result "`sched_string'"
 						display as text "                     scale = " as result `scale'
@@ -600,7 +601,7 @@ prog define samy76 , rclass
 						display as text "                     alpha = " as result %6.4f round(`alpha', 0.0001)
 						display as text "                         N =   " as result 2*ceil(`n'/2)
 						display as text "                 N per arm =   " as result ceil(`n'/2)
-						display as text "             effectiveness =  " as result %4.2f round(`effectiveness', 0.02)
+						display as text "             effectiveness =  " as result %4.2f round(`effectiveness', 0.01)
 						display as text "number of follow-up visits = " as result `vvv'
 						display as text "   schedule (and dropouts) : " as result "`sched_string'"
 						display as text "                     scale = " as result `scale'

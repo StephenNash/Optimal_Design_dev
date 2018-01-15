@@ -33,9 +33,14 @@ cap log close
 	local alpha 0.05
 	local power 0.9
 	local effectiveness 42
-	local eff1 30
+	local eff1 0.30
 	local eff2 30
 	local iter 16
+
+samy76 sdmt, subject(subject) model(1) time(time) visit(visit) casecon(case) schedule(1 2) alpha(0.05) n(1000) /*power(`power')*/ dropout(0.1 0.1) effectiveness(`eff1')
+local power=r(power)
+samy76 sdmt, subject(subject) model(1) time(time) visit(visit) casecon(case) schedule(1 2) alpha(0.05) /*n(50)*/ power(`power') dropout(0.1 0.1) effectiveness(`eff1')
+ 
 
 samy76 sdmt, subject(subject) model(1) /*nocontvar*/  time(time) visit(visit) casecon(case) schedule(1 2) iter(`iter') alpha(0.05) n(50) /*power(`power')*/ dropout(0.1 0.1) effectiveness(`eff1')
 samy76 sdmt, subject(subject) model(1) time(time) visit(visit) casecon(case) schedule(1 5) iter(`iter') alpha(`alpha') power(`power') dropout(0.1 0.1) effectiveness(`eff2')
